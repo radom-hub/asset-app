@@ -9,7 +9,6 @@
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     
     <style>
-        /* CSS เพิ่มเติมเล็กน้อย */
         body { font-family: 'Sarabun', sans-serif; background-color: #f3f4f6; }
         #reader { width: 100%; border-radius: 10px; overflow: hidden; }
     </style>
@@ -24,9 +23,19 @@
 
     <div id="scan-container" class="bg-white p-4 rounded-xl shadow-md mb-6">
         <h2 class="text-lg font-bold mb-2 text-center">สแกน QR Code</h2>
+        
         <div id="reader" class="bg-black"></div>
-        <p class="text-xs text-gray-500 text-center mt-2">หันกล้องไปที่ป้ายครุภัณฑ์</p>
-    </div>
+        <p class="text-xs text-gray-500 text-center mt-2 mb-4">หันกล้องไปที่ป้ายครุภัณฑ์</p>
+
+        <div class="text-center border-t pt-4">
+            <p class="text-gray-500 text-sm mb-2">หรือถ้ากล้องไม่เปิด</p>
+            <label class="block w-full cursor-pointer bg-blue-50 border border-blue-200 rounded-lg p-3 shadow-sm hover:bg-blue-100 text-blue-700 font-bold">
+                📷 ถ่ายรูป/เลือกรูป QR Code
+                <input type="file" id="qr-input-file" accept="image/*" class="hidden" onchange="scanFromFile(this)">
+            </label>
+            <p class="text-xs text-gray-400 mt-1">ใช้วิธีนี้ได้ 100% กับทุกเครื่อง</p>
+        </div>
+        </div>
 
     <div id="result-card" class="hidden bg-white rounded-xl shadow-lg overflow-hidden border-2 border-blue-500">
         <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
