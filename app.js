@@ -193,3 +193,28 @@ function resetScan() {
         startScanner();
     }
 }
+
+// ==========================================
+// 7. ฟังก์ชันสแกนจากรูปภาพ (Backup Plan)
+// ==========================================
+function scanFromFile(inputElement) {
+    if (inputElement.files.length === 0) return;
+
+    const imageFile = inputElement.files[0];
+    
+    // ใช้ Html5Qrcode สแกนไฟล์ภาพ
+    const html5QrCode = new Html5Qrcode("reader");
+    
+    html5QrCode.scanFile(imageFile, true)
+        .then(decodedText => {
+            // ถ้าเจอ QR Code ในรูป
+            console.log("Scan from file result:", decodedText);
+            onScanSuccess(decodedText, null);
+        })
+        .catch(err => {
+            // ถ้าสแกนไม่เจอ หรือรูปไม่ชัด
+            alert("ไม่พบ QR Code ในรูปภาพนี้ หรือรูปไม่ชัดเจน โปรดลองใหม่อีกครั้ง");
+            console.error("Error scanning file:", err);
+        });
+}
+
