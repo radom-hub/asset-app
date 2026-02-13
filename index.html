@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบตรวจสอบครุภัณฑ์ - วสส.อุดรฯ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    
+    <style>
+        /* CSS เพิ่มเติมเล็กน้อย */
+        body { font-family: 'Sarabun', sans-serif; background-color: #f3f4f6; }
+        #reader { width: 100%; border-radius: 10px; overflow: hidden; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="p-4">
+
+    <div class="text-center mb-6">
+        <h1 class="text-2xl font-bold text-blue-800">วสส.อุดรธานี</h1>
+        <p class="text-gray-600">ระบบตรวจสอบครุภัณฑ์</p>
+    </div>
+
+    <div id="scan-container" class="bg-white p-4 rounded-xl shadow-md mb-6">
+        <h2 class="text-lg font-bold mb-2 text-center">สแกน QR Code</h2>
+        <div id="reader" class="bg-black"></div>
+        <p class="text-xs text-gray-500 text-center mt-2">หันกล้องไปที่ป้ายครุภัณฑ์</p>
+    </div>
+
+    <div id="result-card" class="hidden bg-white rounded-xl shadow-lg overflow-hidden border-2 border-blue-500">
+        <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+            <img id="asset-image" src="" alt="รูปครุภัณฑ์" class="w-full h-full object-cover hidden">
+            <span id="no-image-text" class="text-gray-400">ไม่มีรูปภาพ</span>
+        </div>
+        
+        <div class="p-4">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-xs text-gray-500">เลขครุภัณฑ์</p>
+                    <h2 id="asset-code" class="text-xl font-bold text-blue-900">-</h2>
+                </div>
+                <span id="asset-status" class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">ปกติ</span>
+            </div>
+            
+            <div class="mt-4 space-y-2">
+                <div>
+                    <p class="text-xs text-gray-500">รายการ</p>
+                    <p id="asset-name" class="font-medium">-</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500">สถานที่</p>
+                    <p id="asset-location" class="font-medium text-gray-700">-</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500">วันที่ได้รับ</p>
+                    <p id="asset-date" class="font-medium text-gray-700">-</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex gap-2">
+                <button onclick="resetScan()" class="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg font-bold">สแกนใหม่</button>
+                <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-bold shadow">แจ้งซ่อม</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
